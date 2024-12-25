@@ -29,28 +29,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun generateNumbers(inputNumber: String, textView: TextView){
-        if(inputNumber.isNotEmpty()){
-            val qtyNumbers = edtNumber.text.toString().toInt()
-            if (qtyNumbers in 6..15){
-                val random = Random()
-                val numbers = mutableSetOf<Int>()
-
-                while (true){
-                    val number = random.nextInt(60)
-                    numbers.add(number + 1)
-                    if (numbers.size == qtyNumbers) break
-                }
-
-                numbers.forEach(){num->
-                    Log.i(TAG, num.toString())
-                }
-                textView.text = numbers.joinToString("-")
-
-            }else{
-                Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
-            }
-        }else{
+        if(inputNumber.isEmpty()){
             Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
+            return
         }
+        val qtyNumbers = inputNumber.toInt()
+
+        if (qtyNumbers < 6|| qtyNumbers > 15){
+            Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val random = Random()
+        val numbers = mutableSetOf<Int>()
+
+        while (true){
+            val number = random.nextInt(60)
+            numbers.add(number + 1)
+            if (numbers.size == qtyNumbers) break
+        }
+        textView.text = numbers.joinToString("-")
     }
 }
