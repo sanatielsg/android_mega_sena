@@ -29,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         prefs = getSharedPreferences("shdb", Context.MODE_PRIVATE)
 
         val oldResult = prefs.getString("result",null)
-        if (oldResult != null) {
+
+        oldResult?.let {
             txtResult.text = oldResult
         }
 
@@ -60,8 +61,9 @@ class MainActivity : AppCompatActivity() {
         }
         textView.text = numbers.joinToString("-")
 
-        val editor = prefs.edit()
-        editor.putString("result",textView.text.toString())
-        editor.apply()
+        prefs.edit().apply {
+            putString("result",textView.text.toString())
+            apply()
+        }
     }
 }
