@@ -3,4 +3,5 @@
     <string name="title">Boa Sorte!</string>
     <string name="number_hint">Digite um número entre 6 e 15</string>
     <string name="label_generator">Gerar Números</string>
+    <string name="message_range_number">Informar um número entre 1 e 15</string>
 </resources>
