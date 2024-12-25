@@ -24,33 +24,33 @@ class MainActivity : AppCompatActivity() {
         txtResult = findViewById(R.id.txt_result)
 
         btnGenerate.setOnClickListener {
-            if(edtNumber.text.isNotEmpty()){
-                val qtyNumbers = edtNumber.text.toString().toInt()
-                if (qtyNumbers in 6..15){
-                    val random = Random()
-                    val numbers = mutableSetOf<Int>()
-
-                    while (true){
-                        val number = random.nextInt(60)
-                        numbers.add(number + 1)
-                        if (numbers.size == qtyNumbers) break
-                    }
-
-                    numbers.forEach(){num->
-                        Log.i(TAG, num.toString())
-                    }
-                    txtResult.text = numbers.joinToString("-")
-
-                }else{
-                    Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
-                }
-            }else{
-                Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
-            }
+            generateNumbers(edtNumber.text.toString(), txtResult)
         }
     }
 
-    fun generateNumbers(number: Int, textView: TextView){
+    fun generateNumbers(inputNumber: String, textView: TextView){
+        if(inputNumber.isNotEmpty()){
+            val qtyNumbers = edtNumber.text.toString().toInt()
+            if (qtyNumbers in 6..15){
+                val random = Random()
+                val numbers = mutableSetOf<Int>()
 
+                while (true){
+                    val number = random.nextInt(60)
+                    numbers.add(number + 1)
+                    if (numbers.size == qtyNumbers) break
+                }
+
+                numbers.forEach(){num->
+                    Log.i(TAG, num.toString())
+                }
+                textView.text = numbers.joinToString("-")
+
+            }else{
+                Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            Toast.makeText(this, getString(R.string.message_range_number), Toast.LENGTH_SHORT).show()
+        }
     }
 }
